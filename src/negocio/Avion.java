@@ -102,7 +102,7 @@ public class Avion {
 
     @Override
     public String toString() {
-        return "Avion{" + "marca=" + marca + ", modelo=" + modelo + ", capacidadDePasajeros=" + capacidadDePasajeros + ", numeroDeHelices=" + numeroDeHelices + ", distanciaEntreLosAsientos=" + distanciaEntreLosAsientos + '}';
+        return "Avion{" + "marca= " + marca + ", modelo= " + modelo + ", capacidadDePasajeros= " + capacidadDePasajeros + ", numeroDeHelices= " + numeroDeHelices + ", distanciaEntreLosAsientos=" + distanciaEntreLosAsientos + '}';
     }
     
     

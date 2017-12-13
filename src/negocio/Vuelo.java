@@ -3,6 +3,7 @@ package negocio;
 import datos.Piloto;
 import datos.Azafate;
 import datos.Cliente;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
@@ -17,14 +18,16 @@ public class Vuelo {
     private List<Cliente> clientes;
     private boolean cargaAnimal;
 
-    private List<Piloto> pilotosDelVuelo;
-    private List<Azafate> azafatesDelVuelo;
-    private List<Cliente> pasajerosDelVuelo;
-    private Scanner s;
 
+    
+    List<Piloto> pilotosDelVuelo = new ArrayList<>();
+    List<Azafate> azafatesDelVuelo = new ArrayList<>();
+    List<Cliente> pasajerosDelVuelo = new ArrayList<>();
+
+    Scanner s = new Scanner(System.in);
     private boolean seEncontro = false;
-    private int limiteDePasajeros = avion.getCapacidadDePasajeros();
-    private int cantidadActualDePasajeros = 0;
+
+    private int cantidadDePasajeros = 0;
 
     public Vuelo() {
 
@@ -126,13 +129,12 @@ public class Vuelo {
         this.pasajerosDelVuelo = pasajerosDelVuelo;
     }
 
-    public Scanner getS() {
-        return s;
+    public void mostrarPilotosDelVuelo() {
+        for (Piloto piloto : pilotosDelVuelo) {
+            System.out.println(piloto);
+        }
     }
 
-    public void setS(Scanner s) {
-        this.s = s;
-    }
 
     public boolean isSeEncontro() {
         return seEncontro;
@@ -142,20 +144,12 @@ public class Vuelo {
         this.seEncontro = seEncontro;
     }
 
-    public int getLimiteDePasajeros() {
-        return limiteDePasajeros;
-    }
-
-    public void setLimiteDePasajeros(int limiteDePasajeros) {
-        this.limiteDePasajeros = limiteDePasajeros;
-    }
-
     public int getCantidadActualDePasajeros() {
-        return cantidadActualDePasajeros;
+        return cantidadDePasajeros;
     }
 
     public void setCantidadActualDePasajeros(int cantidadActualDePasajeros) {
-        this.cantidadActualDePasajeros = cantidadActualDePasajeros;
+        this.cantidadDePasajeros = cantidadActualDePasajeros;
     }
 
     @Override
@@ -185,10 +179,8 @@ public class Vuelo {
         if (this.seEncontro != other.seEncontro) {
             return false;
         }
-        if (this.limiteDePasajeros != other.limiteDePasajeros) {
-            return false;
-        }
-        if (this.cantidadActualDePasajeros != other.cantidadActualDePasajeros) {
+
+        if (this.cantidadDePasajeros != other.cantidadDePasajeros) {
             return false;
         }
         if (!Objects.equals(this.destino, other.destino)) {
@@ -215,13 +207,11 @@ public class Vuelo {
         if (!Objects.equals(this.pasajerosDelVuelo, other.pasajerosDelVuelo)) {
             return false;
         }
-        if (!Objects.equals(this.s, other.s)) {
-            return false;
-        }
+//        if (!Objects.equals(this.s, other.s)) {
+//            return false;
+//        }
         return true;
     }
-    
-    
 
     public void agregarTripulantesdeCabina() {
         System.out.print("Ingrese rut del tripulante de cabina a agregar: ");
@@ -229,12 +219,18 @@ public class Vuelo {
 
         boolean esPiloto = true;
 
-        if (pilotos.contains(rutTC)) {
-            esPiloto = true;
-        } else if (azafates.contains(rutTC)) {
-            esPiloto = false;
-        } else if (!pilotos.contains(rutTC) && !azafates.contains(rutTC)) {
-            System.out.println("No existe personal alguno con ese rut. ");
+        for (Piloto piloto : pilotos) {
+            if (piloto.getRut().equalsIgnoreCase(rutTC)) {
+                esPiloto = true;
+            }
+
+        }
+
+        for (Azafate azafate : azafates) {
+            if (azafate.getRut().equalsIgnoreCase(rutTC)) {
+                esPiloto = false;
+            }
+
         }
 
         if (esPiloto) {
@@ -245,61 +241,61 @@ public class Vuelo {
             int edadPEV = 0;
             int horasDEVPEV = 0;
 
+            for (Piloto piloto : pilotos) {
+                System.out.println(piloto);
+
+            }
+
             for (Piloto p : pilotos) {
-                if (p.getRut().equalsIgnoreCase(rutTC) && !pilotosDelVuelo.contains(p)) {
-                    rPEV = p.getRut();
-                    nPEV = p.getNombre();
-                    aPEV = p.getApellido();
-                    nacPEV = p.getNacionalidad();
-                    edadPEV = p.getEdad();
-                    horasDEVPEV = p.getHoras_de_vuelo();
 
-                } else if (p.getRut().equalsIgnoreCase(rutTC) && pilotosDelVuelo.contains(p)) {
+                if (p.getRut().equalsIgnoreCase(rutTC) && !pilotosDelVuelo.equals(p)) {
+
+                    pilotosDelVuelo.add(p);
+                    System.out.println("Se agrego al piloto " + p);
+
+                } else if (p.getRut().equalsIgnoreCase(rutTC) && pilotosDelVuelo.equals(p)) {
                     System.out.println("No puede agregar a alguien que ya esta en el vuelo");
                 }
 
+
             }
 
-            Piloto pilDEesteVuelo = new Piloto(rutTC, nacPEV, aPEV, nacPEV, edadPEV, horasDEVPEV);
-            pilotosDelVuelo.add(pilDEesteVuelo);
-            System.out.print("Se agrego exitosamente al piloto: " + pilDEesteVuelo);
+        } else if (!esPiloto) {
+            String rAEV = null;
+            String nAEV = null;
+            String aAEV = null;
+            String nacAEV = null;
+            int eAEV = 0;
+            String iAEV = null;
 
-        }else if(!esPiloto){
-            String rAEV=null;
-            String nAEV=null;
-            String aAEV=null;
-            String nacAEV=null;
-            int eAEV=0;
-            String iAEV=null;
-            
             for (Azafate az : azafates) {
-                if(az.getRut().equalsIgnoreCase(rutTC)&& !azafatesDelVuelo.contains(az)){
-                    rAEV=az.getRut();
-                    nAEV=az.getNombre();
-                    aAEV=az.getApellido();
-                    nacAEV=az.getNacionalidad();
-                    eAEV=az.getEdad();
-                    if(az.getIdioma()==null){
-                        iAEV="No sabe un tercer idioma. ";
-                    }else if(az.getIdioma()!=null){
-                        iAEV=az.getIdioma();
+                if (az.getRut().equalsIgnoreCase(rutTC) && !azafatesDelVuelo.contains(az)) {
+                    rAEV = az.getRut();
+                    nAEV = az.getNombre();
+                    aAEV = az.getApellido();
+                    nacAEV = az.getNacionalidad();
+                    eAEV = az.getEdad();
+                    if (az.getIdioma() == null) {
+                        iAEV = "No sabe un tercer idioma. ";
+                    } else if (az.getIdioma() != null) {
+                        iAEV = az.getIdioma();
                     }
-                }else if(az.getRut().equalsIgnoreCase(rutTC)&& azafatesDelVuelo.contains(az)){
+                } else if (az.getRut().equalsIgnoreCase(rutTC) && azafatesDelVuelo.contains(az)) {
                     System.out.println("No puede agregar a alguien que ya esta en el vuelo");
                 }
-                
+
             }
-            
-            Azafate azafateDeEstevuelo= new Azafate(rutTC, nacAEV, destino, nacAEV, eAEV, iAEV);
+
+            Azafate azafateDeEstevuelo = new Azafate(rutTC, nacAEV, destino, nacAEV, eAEV, iAEV);
             azafatesDelVuelo.add(azafateDeEstevuelo);
-            System.out.println("Se agrego exitosamente al azafate "+azafateDeEstevuelo);
+            System.out.println("Se agrego exitosamente al azafate " + azafateDeEstevuelo);
         }
 
     }
 
     public void agregarPasajero() {
 
-        if (cantidadActualDePasajeros < limiteDePasajeros) {
+        if (cantidadDePasajeros < avion.getCapacidadDePasajeros()) {
             System.out.print("Ingrese el rut de un cliente para embarcarlo en este vuelo");
             String rutDePasajero = s.next();
             String rutPasajero = null;
@@ -328,19 +324,19 @@ public class Vuelo {
                 Cliente pasajeroDeEsteVuelo = new Cliente(rutPasajero, nombrePasajero);
                 System.out.println("Se agrego exitosamente al siguiente pasajero: " + pasajeroDeEsteVuelo);
                 pasajerosDelVuelo.add(pasajeroDeEsteVuelo);
-                cantidadActualDePasajeros++;
+                cantidadDePasajeros++;
 
             }
 
-        } else if (cantidadActualDePasajeros >= limiteDePasajeros) {
-            System.out.println("No se puede agregar mas pasajeros porque ya se llego al limite de pasajeros (" + limiteDePasajeros + ")");
+        } else if (cantidadDePasajeros >= avion.getCapacidadDePasajeros()) {
+            System.out.println("No se puede agregar mas pasajeros porque ya se llego al limite de pasajeros (" + avion.getCapacidadDePasajeros() + ")");
         }
 
     }
 
     public void eliminarPasajero() {
 
-        if (cantidadActualDePasajeros <= limiteDePasajeros && cantidadActualDePasajeros > 0) {
+        if (cantidadDePasajeros <= avion.getCapacidadDePasajeros() && cantidadDePasajeros > 0) {
             System.out.print("Inrese rut del pasajero a eliminar de este vuelo: ");
             String rutPAEliminar = s.next();
 
@@ -373,7 +369,7 @@ public class Vuelo {
 
             Cliente pasaAElim = new Cliente(rutPElim, nomPElim);
             System.out.println("Se borro el siguiente pasajero: " + pasaAElim);
-            cantidadActualDePasajeros -= 1;
+            cantidadDePasajeros -= 1;
 
         } else {
             System.out.println("No puede eliminar pasajeros si no hay ninguno");
@@ -390,12 +386,7 @@ public class Vuelo {
 
     @Override
     public String toString() {
-        return "Vuelo{" + "numeroDeVuelo=" + numeroDeVuelo + ", destino=" + destino + ", avion=" + avion + ", pilotos=" + pilotos + ", azafates=" + azafates + ", clientes=" + clientes + ", cargaAnimal=" + cargaAnimal + ", pilotosDelVuelo=" + pilotosDelVuelo + ", azafatesDelVuelo=" + azafatesDelVuelo + ", pasajerosDelVuelo=" + pasajerosDelVuelo + ", s=" + s + ", seEncontro=" + seEncontro + ", limiteDePasajeros=" + limiteDePasajeros + ", cantidadActualDePasajeros=" + cantidadActualDePasajeros + '}';
+        return "Vuelo{" + "numeroDeVuelo=" + numeroDeVuelo + ", destino=" + destino + ", avion=" + avion + ", pilotos=" + pilotos + ", azafates=" + azafates + ", clientes=" + clientes + ", cargaAnimal=" + cargaAnimal + ", pilotosDelVuelo=" + pilotosDelVuelo + ", azafatesDelVuelo=" + azafatesDelVuelo + ", pasajerosDelVuelo=" + pasajerosDelVuelo + ", s=" + s + ", seEncontro=" + seEncontro + ", limiteDePasajeros=" + avion.getCapacidadDePasajeros() + ", cantidadActualDePasajeros=" + cantidadDePasajeros + '}';
     }
-
-
-    
-    
-    
 
 }

@@ -211,9 +211,9 @@ public class Piloto extends PersonalDeCabina {
      */
     @Override
     public String toString() {
-        return "" + getClass().getSimpleName().toLowerCase() + "{" + "Rut=" + getRut() + "Horas de vuelo=" + horas_de_vuelo
-                + "Nombre=" + getNombre() + "Apellido" + getApellido() + "Nacionalidad=" + getNacionalidad()
-                + "Edad=" + getEdad() + '}';
+        return "" + getClass().getSimpleName().toLowerCase() + "{" + "Rut= " + getRut() + "Horas de vuelo= " + horas_de_vuelo
+                + "Nombre= " + getNombre() + "Apellido= " + getApellido() + "Nacionalidad= " + getNacionalidad()
+                + "Edad= " + getEdad() + '}';
     }
 
     /**

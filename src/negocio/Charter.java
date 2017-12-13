@@ -80,16 +80,16 @@ public class Charter extends Vuelo {
     public int getCantidadActualDePasajeros() {
         return super.getCantidadActualDePasajeros(); 
     }
-
-    @Override
-    public void setLimiteDePasajeros(int limiteDePasajeros) {
-        super.setLimiteDePasajeros(limiteDePasajeros); 
-    }
-
-    @Override
-    public int getLimiteDePasajeros() {
-        return super.getLimiteDePasajeros(); 
-    }
+//
+//    @Override
+//    public void setLimiteDePasajeros(int limiteDePasajeros) {
+//        super.setLimiteDePasajeros(limiteDePasajeros); 
+//    }
+//
+//    @Override
+//    public int getLimiteDePasajeros() {
+//        return super.getLimiteDePasajeros(); 
+//    }
 
     @Override
     public void setSeEncontro(boolean seEncontro) {
@@ -101,15 +101,15 @@ public class Charter extends Vuelo {
         return super.isSeEncontro(); 
     }
 
-    @Override
-    public void setS(Scanner s) {
-        super.setS(s); 
-    }
-
-    @Override
-    public Scanner getS() {
-        return super.getS();
-    }
+//    @Override
+//    public void setS(Scanner s) {
+//        super.setS(s); 
+//    }
+//
+//    @Override
+//    public Scanner getS() {
+//        return super.getS();
+//    }
 
     @Override
     public void setPasajerosDelVuelo(List<Cliente> pasajerosDelVuelo) {

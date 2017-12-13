@@ -19,7 +19,7 @@ public class Programa {
         List<Azafate> azafates = new ArrayList<>();
         List<Cliente> clientes = new ArrayList<>();
         List<Avion> aviones = new ArrayList<>();
-        List<Pasaje>pasajes=new ArrayList<>();
+        List<Pasaje> pasajes = new ArrayList<>();
 
         boolean terminar = false;
 
@@ -49,24 +49,34 @@ public class Programa {
                 case 8:
                     terminar = true;
                     System.out.println("Programa terminado.");
-                    System.out.println("Desarrollado por Marcelo Aranda");
+                    System.out.println("Desarrollado por Marcelo Aranda.");
                     break;
 
                 case 1:
+                    Piloto piloto= new Piloto();
+
                     System.out.print("Ingrese rut del piloto: ");
                     String rutPiloto = s.next();
+                    piloto.setRut(rutPiloto);
                     System.out.print("Ingrese nombre del piloto: ");
                     String nombrePiloto = s.next();
+                    piloto.setNombre(nombrePiloto);
                     System.out.print("Ingrese apellido del piloto: ");
                     String apellidoPiloto = s.next();
-                    System.out.print("Ingrese naconalidad del piloto:");
+                    piloto.setApellido(apellidoPiloto);
+                    System.out.print("Ingrese nacionalidad del piloto:");
                     String nacionalidadPiloto = s.next();
+                    piloto.setNacionalidad(nacionalidadPiloto);
                     System.out.print("Ingrese edad del piloto: ");
                     int edadPiloto = Integer.parseInt(s.next());
+                    piloto.setEdad(edadPiloto);
                     System.out.print("Ingrese horas de vuelo del piloto: ");
                     int horasDeVueloDelPiloto = Integer.parseInt(s.next());
-                    Piloto piloto = new Piloto(rutPiloto, nombrePiloto, apellidoPiloto, nacionalidadPiloto, edadPiloto, horasDeVueloDelPiloto);
+                    piloto.setHoras_de_vuelo(horasDeVueloDelPiloto);
+
+                    
                     pilotos.add(piloto);
+                    System.out.println(piloto);
                     break;
 
                 case 2:
@@ -117,21 +127,21 @@ public class Programa {
                             suRut = c.getRut();
                             suNombre = c.getNombre();
 
-                        }else{
+                        } else {
                             System.out.println("No hay un cliente con ese rut");
                         }
 
                     }
                     Cliente clienteQueTieneElPasaje = new Cliente(suRut, suNombre);
 
-                    System.out.print("Ingrese numero de vuelo");
+                    System.out.print("Ingrese numero de vuelo: ");
                     int numero_de_vuelo = Integer.parseInt(s.next());
-                    System.out.print("Ingrese fecha y hora");
+                    System.out.print("Ingrese fecha y hora: ");
                     String fecha_y_hora = s.next();
                     int numero_de_asiento = Integer.parseInt(s.next());
-                    System.out.print("Ingrese clase");
+                    System.out.print("Ingrese clase: ");
                     String clase = s.next();
-                    System.out.print("Ingrese valor del pasaje");
+                    System.out.print("Ingrese valor del pasaje: ");
                     int valor = Integer.parseInt(s.next());
 
                     Pasaje pasaje = new Pasaje(clienteQueTieneElPasaje, numero_de_vuelo, fecha_y_hora, numero_de_asiento, clase, valor);
@@ -145,13 +155,14 @@ public class Programa {
                     String modelo = s.next();
                     System.out.print("Ingrese capacidad maxima de pasajeros: ");
                     int capacidadDePasajeros = Integer.parseInt(s.next());
-                    System.out.println("Ingrese numero de helices: ");
+                    System.out.print("Ingrese numero de helices: ");
                     int numeroDeHelices = Integer.parseInt(s.next());
+                    System.out.print("Ingrese distancia en metros entre los asientos: ");
                     float distaciaEntreLosAsientos = Float.parseFloat(s.next());
                     Avion avion = new Avion(marca, modelo, capacidadDePasajeros, numeroDeHelices, distaciaEntreLosAsientos);
                     aviones.add(avion);
                     break;
-
+ 
                 case 6:
                     System.out.print("Ingrese numero de vuelo: ");
                     int numeroDeVuelo = Integer.parseInt(s.next());
@@ -174,7 +185,7 @@ public class Programa {
                             numeroDeHelicesDeEsteAvion = av.getNumeroDeHelices();
                             distanciaEntreLosAsientosDeEsteAvion = av.getDistanciaEntreLosAsientos();
 
-                        } 
+                        }
 
                     }
 
@@ -189,16 +200,117 @@ public class Programa {
                     } else if (res == 2) {
                         cargaAnimal = false;
                     }
-//
-//                    List<Piloto> pilotosDelVuelo = new ArrayList<>();
-//                    List<Azafate> azafatesDelVuelo = new ArrayList<>();
-//                    List<Cliente> clientesDelVuelo = new ArrayList<>();
+
 
                     Vuelo vuelo = new Vuelo(numeroDeVuelo, destino, avionDelVuelo, pilotos, azafates, clientes, cargaAnimal);
-                    
+
+                    while (true) {
+                        System.out.println("Opciones de vuelo: ");
+
+                        int alternativa;
+
+                        System.out.println("1. Agregar tripulante de cabina.");
+                        System.out.println("2. Agregar pasajero.");
+                        System.out.println("3. Eliminar pasajero.");
+                        System.out.println("4. Mostrar informacion del avion.");
+                        System.out.println("5. Mostrar lista de pasajeros del vuelo.");
+                        System.out.println("6. Mostrar lista de pilotos del vuelo.");
+                        System.out.println("7. Mostrar lista de azafates del vuelo.");
+                        System.out.println("8. Mostrar lista de tripulantes de cabina.");
+                        System.out.println("9. Finalizar creacion del vuelo");
+
+
+                                alternativa = Integer.parseInt(s.next());
+                                if (alternativa >= 1 && alternativa <= 9) {
+                                    if (alternativa == 9 && vuelo.getPilotosDelVuelo().isEmpty()) {
+                                        System.out.println("El vuelo debe tener al menos un piloto");
+                                    } else if (alternativa == 9 && !vuelo.getPilotosDelVuelo().isEmpty()) {
+                                        break;
+                                    } else if (alternativa == 1) {
+
+                                        vuelo.agregarTripulantesdeCabina();
+                                    } else if (alternativa == 2) {
+                                        vuelo.agregarPasajero();
+                                    } else if (alternativa == 3) {
+                                        vuelo.eliminarPasajero();
+                                    } else if (alternativa == 4) {
+                                        System.out.println(vuelo.getAvion());
+                                    } else if (alternativa == 5) {
+                                        if (vuelo.getPasajerosDelVuelo().isEmpty()) {
+                                            System.out.println("Este vuelo no lleva pasajeros.");
+                                        }
+                                        vuelo.getPasajerosDelVuelo();
+                                    } else if (alternativa == 6) {
+                                        if (vuelo.getPilotosDelVuelo().isEmpty()) {
+                                            System.out.println("Este vuelo no tiene pilotos asignados.");
+                                        }
+                                        
+                                        vuelo.mostrarPilotosDelVuelo();
+                                    } else if (alternativa == 7) {
+                                        if (vuelo.getAzafatesDelVuelo().isEmpty()) {
+                                            System.out.println("Este vuelo no tiene azafates asignados.");
+                                        }
+                                        vuelo.getAzafatesDelVuelo();
+                                    } else if (alternativa == 8) {
+                                        vuelo.getPilotosDelVuelo();
+                                        vuelo.getAzafatesDelVuelo();
+                                    }
+                                } else if (alternativa < 1 || alternativa > 9) {
+                                    System.out.println("Ese numero no es valido");
+                                }
+
+
+                        
+
+            
+                    }
+
+                    System.out.println("Vuelo creado exitosamente");
                     break;
+
                 case 7:
-                    System.out.println("Es que todavia no hago eso");
+                    System.out.print("Ingrese numero de vuelo: ");
+                    int nVCH = Integer.parseInt(s.next());
+                    System.out.print("Ingrese destino: ");
+                    String dVCH = s.next();
+                    System.out.print("Ingrese modelo del avion en el que se va a volar: ");
+                    String modeloAVCHComprobar = s.next();
+
+                    String marcaDeEsteAvionVCH = null;
+                    String modeloDeEsteAvionVCH = null;
+                    int capacidadDePasajerosDeEsteAvionVCH = 0;
+                    int numeroDeHelicesDeEsteAvionVCH = 0;
+                    float distanciaEntreLosAsientosDeEsteAvionVCH = 0;
+
+                    for (Avion av : aviones) {
+                        if (av.getModelo().equalsIgnoreCase(modeloAVCHComprobar)) {
+                            marcaDeEsteAvionVCH = av.getMarca();
+                            modeloDeEsteAvionVCH = av.getModelo();
+                            capacidadDePasajerosDeEsteAvionVCH = av.getCapacidadDePasajeros();
+                            numeroDeHelicesDeEsteAvionVCH = av.getNumeroDeHelices();
+                            distanciaEntreLosAsientosDeEsteAvionVCH = av.getDistanciaEntreLosAsientos();
+
+                        }
+
+                    }
+
+                    Avion avionDelVueloCH = new Avion(marcaDeEsteAvionVCH, modeloDeEsteAvionVCH, capacidadDePasajerosDeEsteAvionVCH, numeroDeHelicesDeEsteAvionVCH, distanciaEntreLosAsientosDeEsteAvionVCH);
+                    System.out.println("Tiene carga animal?");
+                    System.out.println("1. Si");
+                    System.out.println("2. No");
+                    int resVCH = Integer.parseInt(s.next());
+                    boolean cargaAnimalVCH = false;
+                    if (resVCH == 1) {
+                        cargaAnimal = true;
+                    } else if (resVCH == 2) {
+                        cargaAnimal = false;
+                    }
+
+                    Charter vueloCH = new Charter(nVCH, dVCH, avionDelVueloCH, pilotos, azafates, clientes, cargaAnimalVCH);
+                    //creado nuevo vuelo charter
+
+                    break;
+
                 default:
                     System.out.println("El parametro ingresado no tiene efecto alguno.");
 
