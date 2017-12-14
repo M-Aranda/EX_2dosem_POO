@@ -211,8 +211,8 @@ public class Piloto extends PersonalDeCabina {
      */
     @Override
     public String toString() {
-        return "" + getClass().getSimpleName().toLowerCase() + "{" + "Rut= " + getRut() + "Horas de vuelo= " + horas_de_vuelo
-                + "Nombre= " + getNombre() + "Apellido= " + getApellido() + "Nacionalidad= " + getNacionalidad()
+        return "" + getClass().getSimpleName().toLowerCase() + "{" + " Rut= " + getRut() + " Horas de vuelo= " + horas_de_vuelo
+                + " Nombre= " + getNombre() + " Apellido= " + getApellido() + " Nacionalidad= " + getNacionalidad()
                 + "Edad= " + getEdad() + '}';
     }
 
@@ -275,7 +275,7 @@ public class Piloto extends PersonalDeCabina {
      */
     @Override
     public void mensajeDeErrorPorEdad() {
-        System.out.println("Error: Azafate debe de tener por lo menos 21 años de edad");
+        System.out.println("Error: piloto debe de tener por lo menos 21 años de edad");
     }
 
     /**

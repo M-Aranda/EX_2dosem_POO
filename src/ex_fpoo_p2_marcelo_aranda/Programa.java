@@ -23,9 +23,10 @@ public class Programa {
 
         boolean terminar = false;
 
+        System.out.println("Bienvenido al sistema de creacion de vuelos");
+
         while (true) {
 
-            System.out.println("Bienvenido al sistema de creacion de vuelos");
             System.out.println("Seleccione opcion: ");
 
             System.out.println("1. Crear piloto");
@@ -53,7 +54,7 @@ public class Programa {
                     break;
 
                 case 1:
-                    Piloto piloto= new Piloto();
+                    Piloto piloto = new Piloto();
 
                     System.out.print("Ingrese rut del piloto: ");
                     String rutPiloto = s.next();
@@ -74,22 +75,27 @@ public class Programa {
                     int horasDeVueloDelPiloto = Integer.parseInt(s.next());
                     piloto.setHoras_de_vuelo(horasDeVueloDelPiloto);
 
-                    
                     pilotos.add(piloto);
-                    System.out.println(piloto);
+                    System.out.println("Se creo al " + piloto);
                     break;
 
                 case 2:
+                    Azafate azafate = new Azafate();
                     System.out.print("Ingrese rut de azafate: ");
                     String rutAzafate = s.next();
+                    azafate.setRut(rutAzafate);
                     System.out.print("Ingrese nombre de azafate: ");
                     String nombreAzafate = s.next();
+                    azafate.setNombre(nombreAzafate);
                     System.out.print("Ingrese apellido de azafate: ");
                     String apellidoAzafate = s.next();
+                    azafate.setApellido(apellidoAzafate);
                     System.out.print("Ingrese nacionalidad del azafate: ");
                     String nacionalidadAzafate = s.next();
+                    azafate.setNacionalidad(nacionalidadAzafate);
                     System.out.print("Ingrese edad del azafate: ");
                     int edadAzafate = Integer.parseInt(s.next());
+                    azafate.setEdad(edadAzafate);
                     System.out.println("Tiene un tercer idioma?");
                     System.out.println("1. Si");
                     System.out.println("2. No");
@@ -97,14 +103,17 @@ public class Programa {
                     if (tercerIdioma == 1) {
                         System.out.print("Idioma: ");
                         String idiomaAzafate = s.next();
-                        Azafate azafate = new Azafate(rutAzafate, nombreAzafate, apellidoAzafate, nacionalidadAzafate, edadAzafate, idiomaAzafate);
+                        azafate.setIdioma(idiomaAzafate);
+
                         azafates.add(azafate);
 
                     } else if (tercerIdioma == 2) {
-                        Azafate azafate = new Azafate(rutAzafate, nombreAzafate, apellidoAzafate, nacionalidadAzafate, edadAzafate);
+                        azafate.setIdioma("No tiene");
                         azafates.add(azafate);
 
                     }
+                    
+                    System.out.println("Se creo al "+azafate);
                     break;
 
                 case 3:
@@ -114,6 +123,7 @@ public class Programa {
                     String nombreCliente = s.next();
                     Cliente cliente = new Cliente(rutCliente, nombreCliente);
                     clientes.add(cliente);
+                    System.out.println("Se creo al "+cliente);
                     break;
 
                 case 4:
@@ -146,6 +156,7 @@ public class Programa {
 
                     Pasaje pasaje = new Pasaje(clienteQueTieneElPasaje, numero_de_vuelo, fecha_y_hora, numero_de_asiento, clase, valor);
                     pasajes.add(pasaje);
+                    System.out.println("Pasaje creado.");
                     break;
 
                 case 5:
@@ -162,7 +173,7 @@ public class Programa {
                     Avion avion = new Avion(marca, modelo, capacidadDePasajeros, numeroDeHelices, distaciaEntreLosAsientos);
                     aviones.add(avion);
                     break;
- 
+
                 case 6:
                     System.out.print("Ingrese numero de vuelo: ");
                     int numeroDeVuelo = Integer.parseInt(s.next());
@@ -201,13 +212,13 @@ public class Programa {
                         cargaAnimal = false;
                     }
 
-
                     Vuelo vuelo = new Vuelo(numeroDeVuelo, destino, avionDelVuelo, pilotos, azafates, clientes, cargaAnimal);
 
                     while (true) {
                         System.out.println("Opciones de vuelo: ");
 
                         int alternativa;
+                        
 
                         System.out.println("1. Agregar tripulante de cabina.");
                         System.out.println("2. Agregar pasajero.");
@@ -219,50 +230,54 @@ public class Programa {
                         System.out.println("8. Mostrar lista de tripulantes de cabina.");
                         System.out.println("9. Finalizar creacion del vuelo");
 
+                        alternativa = Integer.parseInt(s.next());
+                        if (alternativa >= 1 && alternativa <= 9) {
+                            if (alternativa == 9 && vuelo.getPilotosDelVuelo().isEmpty()) {
+                                System.out.println("El vuelo debe tener al menos un piloto");
+                            } else if (alternativa == 9 && !vuelo.getPilotosDelVuelo().isEmpty()) {
+                                break;
+                            } else if (alternativa == 1) {
 
-                                alternativa = Integer.parseInt(s.next());
-                                if (alternativa >= 1 && alternativa <= 9) {
-                                    if (alternativa == 9 && vuelo.getPilotosDelVuelo().isEmpty()) {
-                                        System.out.println("El vuelo debe tener al menos un piloto");
-                                    } else if (alternativa == 9 && !vuelo.getPilotosDelVuelo().isEmpty()) {
-                                        break;
-                                    } else if (alternativa == 1) {
-
-                                        vuelo.agregarTripulantesdeCabina();
-                                    } else if (alternativa == 2) {
-                                        vuelo.agregarPasajero();
-                                    } else if (alternativa == 3) {
-                                        vuelo.eliminarPasajero();
-                                    } else if (alternativa == 4) {
-                                        System.out.println(vuelo.getAvion());
-                                    } else if (alternativa == 5) {
-                                        if (vuelo.getPasajerosDelVuelo().isEmpty()) {
-                                            System.out.println("Este vuelo no lleva pasajeros.");
-                                        }
-                                        vuelo.getPasajerosDelVuelo();
-                                    } else if (alternativa == 6) {
-                                        if (vuelo.getPilotosDelVuelo().isEmpty()) {
-                                            System.out.println("Este vuelo no tiene pilotos asignados.");
-                                        }
-                                        
-                                        vuelo.mostrarPilotosDelVuelo();
-                                    } else if (alternativa == 7) {
-                                        if (vuelo.getAzafatesDelVuelo().isEmpty()) {
-                                            System.out.println("Este vuelo no tiene azafates asignados.");
-                                        }
-                                        vuelo.getAzafatesDelVuelo();
-                                    } else if (alternativa == 8) {
-                                        vuelo.getPilotosDelVuelo();
-                                        vuelo.getAzafatesDelVuelo();
-                                    }
-                                } else if (alternativa < 1 || alternativa > 9) {
-                                    System.out.println("Ese numero no es valido");
+                                vuelo.agregarTripulantesdeCabina();
+                            } else if (alternativa == 2) {
+                                vuelo.agregarPasajero();
+                            } else if (alternativa == 3) {
+                                vuelo.eliminarPasajero();
+                            } else if (alternativa == 4) {
+                                System.out.println(vuelo.getAvion());
+                            } else if (alternativa == 5) {
+                                if (vuelo.getPasajerosDelVuelo().isEmpty()) {
+                                    System.out.println("Este vuelo no lleva pasajeros.");
+                                }
+                                vuelo.mostrarListaDePasajeros();
+                            } else if (alternativa == 6) {
+                                if (vuelo.getPilotosDelVuelo().isEmpty()) {
+                                    System.out.println("Este vuelo no tiene pilotos asignados.");
                                 }
 
+                                vuelo.mostrarPilotosDelVuelo();
+                            } else if (alternativa == 7) {
+                                if (vuelo.getAzafatesDelVuelo().isEmpty()) {
+                                    System.out.println("Este vuelo no tiene azafates asignados.");
+                                }
+                                vuelo.mostrarAzafatesDelVuelo();
+                            } else if (alternativa == 8) {
+                                if (vuelo.getPilotosDelVuelo().isEmpty()) {
+                                    System.out.println("Este vuelo no tiene pilotos asignados.");
+                                } else {
+                                    vuelo.mostrarPilotosDelVuelo();
+                                }
+                                if (vuelo.getAzafatesDelVuelo().isEmpty()) {
+                                    System.out.println("Este vuelo no tiene azafates asignados.");
+                                } else {
+                                    vuelo.mostrarAzafatesDelVuelo();
+                                }
 
-                        
+                            }
+                        } else if (alternativa < 1 || alternativa > 9) {
+                            System.out.println("Ese numero no es valido");
+                        }
 
-            
                     }
 
                     System.out.println("Vuelo creado exitosamente");
@@ -308,6 +323,76 @@ public class Programa {
 
                     Charter vueloCH = new Charter(nVCH, dVCH, avionDelVueloCH, pilotos, azafates, clientes, cargaAnimalVCH);
                     //creado nuevo vuelo charter
+
+                    while (true) {
+                        System.out.println("Opciones de vuelo: ");
+
+                        int alternativa2;
+
+                        System.out.println("1. Agregar tripulante de cabina.");
+                        System.out.println("2. Agregar pasajero.");
+                        System.out.println("3. Eliminar pasajero.");
+                        System.out.println("4. Mostrar informacion del avion.");
+                        System.out.println("5. Mostrar lista de pasajeros del vuelo.");
+                        System.out.println("6. Mostrar lista de pilotos del vuelo.");
+                        System.out.println("7. Mostrar lista de azafates del vuelo.");
+                        System.out.println("8. Mostrar lista de tripulantes de cabina.");
+                        System.out.println("9. Ingresar menu.");
+                        System.out.println("10. Finalizar creacion del vuelo");
+
+                        alternativa2 = Integer.parseInt(s.next());
+                        if (alternativa2 >= 1 && alternativa2 <= 10) {
+                            if (alternativa2 == 10 && vueloCH.getPilotosDelVuelo().isEmpty()) {
+                                System.out.println("El vuelo debe tener al menos un piloto");
+                            } else if (alternativa2 == 10 && !vueloCH.getPilotosDelVuelo().isEmpty()) {
+                                break;
+                            } else if (alternativa2 == 1) {
+
+                                vueloCH.agregarTripulantesdeCabina();
+                            } else if (alternativa2 == 2) {
+                                vueloCH.agregarPasajero();
+                            } else if (alternativa2 == 3) {
+                                vueloCH.eliminarPasajero();
+                            } else if (alternativa2 == 4) {
+                                System.out.println(vueloCH.getAvion());
+                            } else if (alternativa2 == 5) {
+                                if (vueloCH.getPasajerosDelVuelo().isEmpty()) {
+                                    System.out.println("Este vuelo no lleva pasajeros.");
+                                }
+                                vueloCH.mostrarListaDePasajeros();
+                            } else if (alternativa2 == 6) {
+                                if (vueloCH.getPilotosDelVuelo().isEmpty()) {
+                                    System.out.println("Este vuelo no tiene pilotos asignados.");
+                                }
+
+                                vueloCH.mostrarPilotosDelVuelo();
+                            } else if (alternativa2 == 7) {
+                                if (vueloCH.getAzafatesDelVuelo().isEmpty()) {
+                                    System.out.println("Este vuelo no tiene azafates asignados.");
+                                }
+                                vueloCH.mostrarAzafatesDelVuelo();
+                            } else if (alternativa2 == 8) {
+                                if (vueloCH.getPilotosDelVuelo().isEmpty()) {
+                                    System.out.println("Este vuelo no tiene pilotos asignados.");
+                                } else {
+                                    vueloCH.mostrarPilotosDelVuelo();
+                                }
+                                if (vueloCH.getAzafatesDelVuelo().isEmpty()) {
+                                    System.out.println("Este vuelo no tiene azafates asignados.");
+                                } else {
+                                    vueloCH.mostrarAzafatesDelVuelo();
+                                }
+
+                            }else if(alternativa2==9){
+                                System.out.print("Ingrese menu para comer, de los pasajeros: ");
+                                String menuPASajeros=s.next();
+                                vueloCH.setMenu(menuPASajeros);
+                            }
+                        } else if (alternativa2 < 1 || alternativa2 > 10) {
+                            System.out.println("Ese numero no es valido");
+                        }
+
+                    }
 
                     break;
 

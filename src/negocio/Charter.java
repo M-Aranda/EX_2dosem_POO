@@ -5,7 +5,7 @@ import datos.Azafate;
 import datos.Cliente;
 import datos.Piloto;
 import java.util.List;
-import java.util.Scanner;
+
 
 
 
@@ -42,6 +42,16 @@ public class Charter extends Vuelo {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj); 
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode(); 
+    }
+
+    @Override
     public void mostrarListaDePasajeros() {
         super.mostrarListaDePasajeros(); 
     }
@@ -58,17 +68,7 @@ public class Charter extends Vuelo {
 
     @Override
     public void agregarTripulantesdeCabina() {
-        super.agregarTripulantesdeCabina();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj); 
-    }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode(); 
+        super.agregarTripulantesdeCabina(); 
     }
 
     @Override
@@ -78,18 +78,8 @@ public class Charter extends Vuelo {
 
     @Override
     public int getCantidadActualDePasajeros() {
-        return super.getCantidadActualDePasajeros(); 
+        return super.getCantidadActualDePasajeros();
     }
-//
-//    @Override
-//    public void setLimiteDePasajeros(int limiteDePasajeros) {
-//        super.setLimiteDePasajeros(limiteDePasajeros); 
-//    }
-//
-//    @Override
-//    public int getLimiteDePasajeros() {
-//        return super.getLimiteDePasajeros(); 
-//    }
 
     @Override
     public void setSeEncontro(boolean seEncontro) {
@@ -101,24 +91,24 @@ public class Charter extends Vuelo {
         return super.isSeEncontro(); 
     }
 
-//    @Override
-//    public void setS(Scanner s) {
-//        super.setS(s); 
-//    }
-//
-//    @Override
-//    public Scanner getS() {
-//        return super.getS();
-//    }
+    @Override
+    public void mostrarAzafatesDelVuelo() {
+        super.mostrarAzafatesDelVuelo(); 
+    }
+
+    @Override
+    public void mostrarPilotosDelVuelo() {
+        super.mostrarPilotosDelVuelo(); 
+    }
 
     @Override
     public void setPasajerosDelVuelo(List<Cliente> pasajerosDelVuelo) {
-        super.setPasajerosDelVuelo(pasajerosDelVuelo);
+        super.setPasajerosDelVuelo(pasajerosDelVuelo); 
     }
 
     @Override
     public List<Cliente> getPasajerosDelVuelo() {
-        return super.getPasajerosDelVuelo(); 
+        return super.getPasajerosDelVuelo();
     }
 
     @Override
@@ -143,12 +133,12 @@ public class Charter extends Vuelo {
 
     @Override
     public void setCargaAnimal(boolean cargaAnimal) {
-        super.setCargaAnimal(cargaAnimal);
+        super.setCargaAnimal(cargaAnimal); 
     }
 
     @Override
     public boolean isCargaAnimal() {
-        return super.isCargaAnimal(); 
+        return super.isCargaAnimal();
     }
 
     @Override
@@ -158,7 +148,7 @@ public class Charter extends Vuelo {
 
     @Override
     public List<Cliente> getClientes() {
-        return super.getClientes(); 
+        return super.getClientes();
     }
 
     @Override
@@ -198,21 +188,20 @@ public class Charter extends Vuelo {
 
     @Override
     public String getDestino() {
-        return super.getDestino(); 
+        return super.getDestino();
     }
 
     @Override
     public void setNumeroDeVuelo(int numeroDeVuelo) {
-        super.setNumeroDeVuelo(numeroDeVuelo); 
+        super.setNumeroDeVuelo(numeroDeVuelo);
     }
 
     @Override
     public int getNumeroDeVuelo() {
-        return super.getNumeroDeVuelo();
+        return super.getNumeroDeVuelo(); 
     }
 
-   
-    
+
     
     
     

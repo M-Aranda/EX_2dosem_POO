@@ -94,7 +94,7 @@ public class Cliente {
      */
     @Override
     public String toString() {
-        return "" + getClass().getSimpleName().toLowerCase() + "{" + "rut=" + rut + ", nombre=" + nombre + '}';
+        return "" + getClass().getSimpleName().toLowerCase() + "{" + " rut= " + rut + ", nombre= " + nombre + '}';
     }
 
     /**

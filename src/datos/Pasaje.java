@@ -178,7 +178,7 @@ public class Pasaje {
      */
     @Override
     public String toString() {
-        return "Pasaje{" + "cliente=" + cliente + ", numero_de_vuelo=" + numero_de_vuelo + ", fecha_y_hora=" + fecha_y_hora + ", numero_de_asiento=" + numero_de_asiento + ", clase=" + clase + ", valor=" + valor + '}';
+        return "Pasaje{" + " cliente= " + cliente + ", numero_de_vuelo= " + numero_de_vuelo + ", fecha_y_hora= " + fecha_y_hora + ", numero_de_asiento= " + numero_de_asiento + ", clase= " + clase + ", valor= " + valor + '}';
     }
 
     /**

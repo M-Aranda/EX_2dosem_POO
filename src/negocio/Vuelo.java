@@ -18,8 +18,6 @@ public class Vuelo {
     private List<Cliente> clientes;
     private boolean cargaAnimal;
 
-
-    
     List<Piloto> pilotosDelVuelo = new ArrayList<>();
     List<Azafate> azafatesDelVuelo = new ArrayList<>();
     List<Cliente> pasajerosDelVuelo = new ArrayList<>();
@@ -135,6 +133,11 @@ public class Vuelo {
         }
     }
 
+    public void mostrarAzafatesDelVuelo() {
+        for (Azafate azafate : azafatesDelVuelo) {
+            System.out.println(azafate);
+        }
+    }
 
     public boolean isSeEncontro() {
         return seEncontro;
@@ -152,85 +155,42 @@ public class Vuelo {
         this.cantidadDePasajeros = cantidadActualDePasajeros;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Vuelo other = (Vuelo) obj;
-        if (this.numeroDeVuelo != other.numeroDeVuelo) {
-            return false;
-        }
-        if (this.cargaAnimal != other.cargaAnimal) {
-            return false;
-        }
-        if (this.seEncontro != other.seEncontro) {
-            return false;
-        }
-
-        if (this.cantidadDePasajeros != other.cantidadDePasajeros) {
-            return false;
-        }
-        if (!Objects.equals(this.destino, other.destino)) {
-            return false;
-        }
-        if (!Objects.equals(this.avion, other.avion)) {
-            return false;
-        }
-        if (!Objects.equals(this.pilotos, other.pilotos)) {
-            return false;
-        }
-        if (!Objects.equals(this.azafates, other.azafates)) {
-            return false;
-        }
-        if (!Objects.equals(this.clientes, other.clientes)) {
-            return false;
-        }
-        if (!Objects.equals(this.pilotosDelVuelo, other.pilotosDelVuelo)) {
-            return false;
-        }
-        if (!Objects.equals(this.azafatesDelVuelo, other.azafatesDelVuelo)) {
-            return false;
-        }
-        if (!Objects.equals(this.pasajerosDelVuelo, other.pasajerosDelVuelo)) {
-            return false;
-        }
-//        if (!Objects.equals(this.s, other.s)) {
-//            return false;
-//        }
-        return true;
-    }
-
     public void agregarTripulantesdeCabina() {
         System.out.print("Ingrese rut del tripulante de cabina a agregar: ");
         String rutTC = s.next();
 
         boolean esPiloto = true;
+        boolean tripulanteExiste = false;
 
         for (Piloto piloto : pilotos) {
             if (piloto.getRut().equalsIgnoreCase(rutTC)) {
                 esPiloto = true;
+                if (!pilotos.contains(piloto)) {
+                    tripulanteExiste = false;
+                } else {
+                    tripulanteExiste = true;
+                }
             }
 
         }
 
-        for (Azafate azafate : azafates) {
-            if (azafate.getRut().equalsIgnoreCase(rutTC)) {
-                esPiloto = false;
+        if (!tripulanteExiste) {
+
+            for (Azafate azafate : azafates) {
+                if (azafate.getRut().equalsIgnoreCase(rutTC)) {
+                    esPiloto = false;
+                    if (!azafates.contains(azafate)) {
+                        tripulanteExiste = false;
+                    } else {
+                        tripulanteExiste = true;
+                    }
+                }
             }
 
+        }
+        
+        if(!tripulanteExiste){
+            System.out.println("No existe personal con ese rut en los registros.");
         }
 
         if (esPiloto) {
@@ -241,22 +201,16 @@ public class Vuelo {
             int edadPEV = 0;
             int horasDEVPEV = 0;
 
-            for (Piloto piloto : pilotos) {
-                System.out.println(piloto);
-
-            }
-
             for (Piloto p : pilotos) {
 
-                if (p.getRut().equalsIgnoreCase(rutTC) && !pilotosDelVuelo.equals(p)) {
+                if (p.getRut().equalsIgnoreCase(rutTC) && !pilotosDelVuelo.contains(p)) {//contains verifica si el objeto ya esta en la lista
 
                     pilotosDelVuelo.add(p);
-                    System.out.println("Se agrego al piloto " + p);
+                    System.out.println("Se agrego al  " + p);
 
-                } else if (p.getRut().equalsIgnoreCase(rutTC) && pilotosDelVuelo.equals(p)) {
-                    System.out.println("No puede agregar a alguien que ya esta en el vuelo");
+                } else if (p.getRut().equalsIgnoreCase(rutTC) && pilotosDelVuelo.contains(p)) {
+                    System.out.println("No puede agregar a alguien que ya esta en el vuelo.");
                 }
-
 
             }
 
@@ -270,25 +224,26 @@ public class Vuelo {
 
             for (Azafate az : azafates) {
                 if (az.getRut().equalsIgnoreCase(rutTC) && !azafatesDelVuelo.contains(az)) {
-                    rAEV = az.getRut();
-                    nAEV = az.getNombre();
-                    aAEV = az.getApellido();
-                    nacAEV = az.getNacionalidad();
-                    eAEV = az.getEdad();
-                    if (az.getIdioma() == null) {
-                        iAEV = "No sabe un tercer idioma. ";
-                    } else if (az.getIdioma() != null) {
-                        iAEV = az.getIdioma();
-                    }
+//                    rAEV = az.getRut();
+//                    nAEV = az.getNombre();
+//                    aAEV = az.getApellido();
+//                    nacAEV = az.getNacionalidad();
+//                    eAEV = az.getEdad();
+//                    
+//                    if (az.getIdioma() == null) {
+//                        iAEV = "No sabe un tercer idioma. ";
+//                    } else if (az.getIdioma() != null) {
+//                        iAEV = az.getIdioma();
+//                    }
+                    azafatesDelVuelo.add(az);
+                    System.out.println("Se agrego al " + az);
+
                 } else if (az.getRut().equalsIgnoreCase(rutTC) && azafatesDelVuelo.contains(az)) {
                     System.out.println("No puede agregar a alguien que ya esta en el vuelo");
                 }
 
             }
 
-            Azafate azafateDeEstevuelo = new Azafate(rutTC, nacAEV, destino, nacAEV, eAEV, iAEV);
-            azafatesDelVuelo.add(azafateDeEstevuelo);
-            System.out.println("Se agrego exitosamente al azafate " + azafateDeEstevuelo);
         }
 
     }
@@ -296,36 +251,27 @@ public class Vuelo {
     public void agregarPasajero() {
 
         if (cantidadDePasajeros < avion.getCapacidadDePasajeros()) {
-            System.out.print("Ingrese el rut de un cliente para embarcarlo en este vuelo");
+            System.out.print("Ingrese el rut de un cliente para embarcarlo en este vuelo: ");
             String rutDePasajero = s.next();
-            String rutPasajero = null;
-            String nombrePasajero = null;
+            seEncontro=false;
 
             for (Cliente cli : clientes) {
                 if (cli.getRut().equalsIgnoreCase(rutDePasajero) && !pasajerosDelVuelo.contains(cli)) {
-                    rutPasajero = cli.getRut();
-                    nombrePasajero = cli.getNombre();
+                    pasajerosDelVuelo.add(cli);
+                    cantidadDePasajeros++;
+                    System.out.println("Se agrego a "+cli);
+                    seEncontro=true;
 
+                }else if(cli.getRut().equalsIgnoreCase(rutDePasajero) && !pasajerosDelVuelo.contains(cli)){
+                    System.out.println("No puede volver a agregar a un pasajero ya registrado");
+                    seEncontro=true;
                 }
-                if (pasajerosDelVuelo.contains(cli.getRut()) == false) {
-                    seEncontro = false;
-
-                } else if (pasajerosDelVuelo.contains(cli.getRut()) == true) {
-                    seEncontro = true;
-                }
+                
 
             }
-
-            if (seEncontro = false) {
-                System.out.println("No se encontro ese pasajero en los registros");
-            }
-
-            if (seEncontro) {
-                Cliente pasajeroDeEsteVuelo = new Cliente(rutPasajero, nombrePasajero);
-                System.out.println("Se agrego exitosamente al siguiente pasajero: " + pasajeroDeEsteVuelo);
-                pasajerosDelVuelo.add(pasajeroDeEsteVuelo);
-                cantidadDePasajeros++;
-
+            
+            if(!seEncontro){
+                System.out.println("No se encontro en los registros.");
             }
 
         } else if (cantidadDePasajeros >= avion.getCapacidadDePasajeros()) {
@@ -368,7 +314,7 @@ public class Vuelo {
             }
 
             Cliente pasaAElim = new Cliente(rutPElim, nomPElim);
-            System.out.println("Se borro el siguiente pasajero: " + pasaAElim);
+            System.out.println("Se borro a: " + pasaAElim+ "de los registros");
             cantidadDePasajeros -= 1;
 
         } else {
@@ -385,8 +331,68 @@ public class Vuelo {
     }
 
     @Override
+    public int hashCode() {
+        int hash = 5;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Vuelo other = (Vuelo) obj;
+        if (this.numeroDeVuelo != other.numeroDeVuelo) {
+            return false;
+        }
+        if (this.cargaAnimal != other.cargaAnimal) {
+            return false;
+        }
+        if (this.seEncontro != other.seEncontro) {
+            return false;
+        }
+        if (this.cantidadDePasajeros != other.cantidadDePasajeros) {
+            return false;
+        }
+        if (!Objects.equals(this.destino, other.destino)) {
+            return false;
+        }
+        if (!Objects.equals(this.avion, other.avion)) {
+            return false;
+        }
+        if (!Objects.equals(this.pilotos, other.pilotos)) {
+            return false;
+        }
+        if (!Objects.equals(this.azafates, other.azafates)) {
+            return false;
+        }
+        if (!Objects.equals(this.clientes, other.clientes)) {
+            return false;
+        }
+        if (!Objects.equals(this.pilotosDelVuelo, other.pilotosDelVuelo)) {
+            return false;
+        }
+        if (!Objects.equals(this.azafatesDelVuelo, other.azafatesDelVuelo)) {
+            return false;
+        }
+        if (!Objects.equals(this.pasajerosDelVuelo, other.pasajerosDelVuelo)) {
+            return false;
+        }
+        if (!Objects.equals(this.s, other.s)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
     public String toString() {
-        return "Vuelo{" + "numeroDeVuelo=" + numeroDeVuelo + ", destino=" + destino + ", avion=" + avion + ", pilotos=" + pilotos + ", azafates=" + azafates + ", clientes=" + clientes + ", cargaAnimal=" + cargaAnimal + ", pilotosDelVuelo=" + pilotosDelVuelo + ", azafatesDelVuelo=" + azafatesDelVuelo + ", pasajerosDelVuelo=" + pasajerosDelVuelo + ", s=" + s + ", seEncontro=" + seEncontro + ", limiteDePasajeros=" + avion.getCapacidadDePasajeros() + ", cantidadActualDePasajeros=" + cantidadDePasajeros + '}';
+        return "Vuelo{" + "numeroDeVuelo=" + numeroDeVuelo + ", destino=" + destino + ", avion=" + avion + ", pilotos=" + pilotos + ", azafates=" + azafates + ", clientes=" + clientes + ", cargaAnimal=" + cargaAnimal + ", pilotosDelVuelo=" + pilotosDelVuelo + ", azafatesDelVuelo=" + azafatesDelVuelo + ", pasajerosDelVuelo=" + pasajerosDelVuelo + ", s=" + s + ", seEncontro=" + seEncontro + ", cantidadDePasajeros=" + cantidadDePasajeros + '}';
     }
 
 }

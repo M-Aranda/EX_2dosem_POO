@@ -208,9 +208,9 @@ public class Azafate extends PersonalDeCabina {
      */
     @Override
     public String toString() {
-        return "" + getClass().getSimpleName().toLowerCase() + "{" + "Rut=" + getRut() + "Idioma=" + idioma
-                + "Nombre=" + getNombre() + "Apellido" + getApellido() + "Nacionalidad=" + getNacionalidad()
-                + "Edad=" + getEdad() + '}';
+        return "" + getClass().getSimpleName().toLowerCase() + "{" + " Rut= " + getRut() + " Idioma= " + idioma
+                + "Nombre= " + getNombre() + "Apellido= " + getApellido() + " Nacionalidad= " + getNacionalidad()
+                + "Edad= " + getEdad() + '}';
     }
 
     /**
