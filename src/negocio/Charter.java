@@ -5,6 +5,7 @@ import datos.Azafate;
 import datos.Cliente;
 import datos.Piloto;
 import java.util.List;
+import servicio.Servicio;
 
 
 
@@ -16,12 +17,12 @@ public class Charter extends Vuelo {
     public Charter() {
     }
 
-    public Charter(int numeroDeVuelo, String destino, Avion avion) {
-        super(numeroDeVuelo, destino, avion);
+    public Charter(int numeroDeVuelo, String destino, Avion avion, Servicio servicio) {
+        super(numeroDeVuelo, destino, avion, servicio);
     }
 
-    public Charter(int numeroDeVuelo, String destino, Avion avion, List<Piloto> pilotos, List<Azafate> azafates, List<Cliente> clientes, boolean CargaAnimal) {
-        super(numeroDeVuelo, destino, avion, pilotos, azafates, clientes, CargaAnimal);
+    public Charter(int numeroDeVuelo, String destino, Avion avion, List<Piloto> pilotos, List<Azafate> azafates, List<Cliente> clientes, boolean CargaAnimal, Servicio servicio) {
+        super(numeroDeVuelo, destino, avion, pilotos, azafates, clientes, CargaAnimal, servicio);
     }
 
     public String getMenu() {
@@ -31,14 +32,25 @@ public class Charter extends Vuelo {
     public void setMenu(String menu) {
         this.menu = menu;
     }
-    
-    public String menuContoString(){
-        return super.toString()+" menu: "+menu;
+
+    @Override
+    public void setServicio(Servicio servicio) {
+        super.setServicio(servicio); 
     }
 
     @Override
+    public Servicio getServicio() {
+        return super.getServicio(); 
+    }
+    
+    
+//    public String menuContoString(){
+//        return super.toString()+" menu: "+menu;
+//    }
+
+    @Override
     public String toString() {
-        return super.toString(); 
+        return super.toString()+" menu: "+menu; 
     }
 
     @Override

@@ -1,10 +1,11 @@
-package ex_fpoo_p2_marcelo_aranda;
+package ex_fpoo_p3_marcelo_aranda;
 
 import datos.*;
 import java.util.ArrayList;
 import java.util.List;
 import negocio.*;
 import java.util.Scanner;
+import servicio.Servicio;
 
 public class Programa {
 
@@ -211,8 +212,13 @@ public class Programa {
                     } else if (res == 2) {
                         cargaAnimal = false;
                     }
+                    
+                    boolean tA=true;
+                    boolean tJ=true;
+                    
+                    Servicio servicio =new Servicio(tA,tJ);
 
-                    Vuelo vuelo = new Vuelo(numeroDeVuelo, destino, avionDelVuelo, pilotos, azafates, clientes, cargaAnimal);
+                    Vuelo vuelo = new Vuelo(numeroDeVuelo, destino, avionDelVuelo, pilotos, azafates, clientes, cargaAnimal, servicio);
 
                     while (true) {
                         System.out.println("Opciones de vuelo: ");
@@ -320,8 +326,13 @@ public class Programa {
                     } else if (resVCH == 2) {
                         cargaAnimal = false;
                     }
-
-                    Charter vueloCH = new Charter(nVCH, dVCH, avionDelVueloCH, pilotos, azafates, clientes, cargaAnimalVCH);
+                    
+                    boolean tAVCH=true;
+                    boolean tJVCH=true;
+                    
+                    Servicio servicioVCH=new Servicio(tAVCH,tJVCH);
+                    
+                    Charter vueloCH = new Charter(nVCH, dVCH, avionDelVueloCH, pilotos, azafates, clientes, cargaAnimalVCH, servicioVCH);
                     //creado nuevo vuelo charter
 
                     while (true) {

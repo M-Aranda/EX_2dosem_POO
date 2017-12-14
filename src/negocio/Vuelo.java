@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
+import servicio.Servicio;
 
 public class Vuelo {
 
@@ -17,6 +18,7 @@ public class Vuelo {
     private List<Azafate> azafates;
     private List<Cliente> clientes;
     private boolean cargaAnimal;
+    private Servicio servicio;
 
     List<Piloto> pilotosDelVuelo = new ArrayList<>();
     List<Azafate> azafatesDelVuelo = new ArrayList<>();
@@ -31,13 +33,14 @@ public class Vuelo {
 
     }
 
-    public Vuelo(int numeroDeVuelo, String destino, Avion avion) {
+    public Vuelo(int numeroDeVuelo, String destino, Avion avion, Servicio servicio) {
         this.numeroDeVuelo = numeroDeVuelo;
         this.destino = destino;
         this.avion = avion;
+        this.servicio=servicio;
     }
 
-    public Vuelo(int numeroDeVuelo, String destino, Avion avion, List<Piloto> pilotos, List<Azafate> azafates, List<Cliente> clientes, boolean CargaAnimal) {
+    public Vuelo(int numeroDeVuelo, String destino, Avion avion, List<Piloto> pilotos, List<Azafate> azafates, List<Cliente> clientes, boolean CargaAnimal, Servicio servicio) {
         this.numeroDeVuelo = numeroDeVuelo;
         this.destino = destino;
         this.avion = avion;
@@ -45,7 +48,17 @@ public class Vuelo {
         this.azafates = azafates;
         this.clientes = clientes;
         this.cargaAnimal = CargaAnimal;
+        this.servicio=servicio;
     }
+
+    public Servicio getServicio() {
+        return servicio;
+    }
+
+    public void setServicio(Servicio servicio) {
+        this.servicio = servicio;
+    }
+    
 
     public int getNumeroDeVuelo() {
         return numeroDeVuelo;
@@ -392,7 +405,7 @@ public class Vuelo {
 
     @Override
     public String toString() {
-        return "Vuelo{" + "numeroDeVuelo=" + numeroDeVuelo + ", destino=" + destino + ", avion=" + avion + ", pilotos=" + pilotos + ", azafates=" + azafates + ", clientes=" + clientes + ", cargaAnimal=" + cargaAnimal + ", pilotosDelVuelo=" + pilotosDelVuelo + ", azafatesDelVuelo=" + azafatesDelVuelo + ", pasajerosDelVuelo=" + pasajerosDelVuelo + ", s=" + s + ", seEncontro=" + seEncontro + ", cantidadDePasajeros=" + cantidadDePasajeros + '}';
+        return "Vuelo{" + " numeroDeVuelo= " + numeroDeVuelo + ", destino= " + destino + ", avion= " + avion + ", pilotos= " + pilotos + ", azafates=" + azafates + ", clientes= " + clientes + ", cargaAnimal= " + cargaAnimal + ", pilotosDelVuelo= " + pilotosDelVuelo + ", azafatesDelVuelo= " + azafatesDelVuelo + ", pasajerosDelVuelo= " + pasajerosDelVuelo + ", s= " + s + ", seEncontro= " + seEncontro + ", cantidadDePasajeros= " + cantidadDePasajeros +", servicio= "+servicio+ '}';
     }
 
 }
